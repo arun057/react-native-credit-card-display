@@ -44,6 +44,7 @@ export default function App() {
             fontSize={12}
             friction={10}
             flipped={card2Toggle}
+            showBrand={false}
           />
           <Button onPress={() => setCard2Toggle(!card2Toggle)} title="Toggle" />
         </View>
