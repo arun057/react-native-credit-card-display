@@ -65,6 +65,12 @@ type Props = {
 
   /** Show/Hide the card type (visa/mastercard/etc) */
   showBrand?: boolean;
+
+  /** Show CVC In Front */
+  cvcInFront?: boolean;
+
+  /** Disable Flip - Only show front */
+  disableFlip?: boolean;
 } & typeof defaultProps;
 
 const defaultProps = {
@@ -78,6 +84,8 @@ const defaultProps = {
   frontImage: require('./assets/images/card-front.png'),
   backImage: require('./assets/images/card-back.png'),
   showBrand: true,
+  cvcInFront: false,
+  disableFlip: false,
 };
 
 const CreditCardDisplay = (props: Props) => {
@@ -137,7 +145,7 @@ const CreditCardDisplay = (props: Props) => {
     <View style={{ height: props.height, width: props.width }}>
       <FlipCard
         style={props.cardStyles}
-        flipHorizontal={true}
+        flipHorizontal={props.disableFlip != null ? props.disableFlip : true}
         flipVertical={false}
         flip={props.flipped}
       >
@@ -183,6 +191,29 @@ const CreditCardDisplay = (props: Props) => {
                           }}
                         >
                           {props.since}
+                        </Text>
+                      </>
+                    )}
+                    {props.cvcInFront && props.cvc != null && (
+                      <>
+                        <Text
+                          style={{
+                            ...styles.groupLabel,
+                            fontSize: props.fontSize * 0.7,
+                            color: props.fontColor,
+                            textAlign: 'right',
+                          }}
+                        >
+                          CVC
+                        </Text>
+
+                        <Text
+                          style={{
+                            fontSize: props.fontSize * 0.7,
+                            color: props.fontColor,
+                          }}
+                        >
+                          {props.cvc}
                         </Text>
                       </>
                     )}
