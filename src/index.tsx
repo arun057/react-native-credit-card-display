@@ -145,7 +145,11 @@ const CreditCardDisplay = (props: Props) => {
     <View style={{ height: props.height, width: props.width }}>
       <FlipCard
         style={props.cardStyles}
-        flipHorizontal={props.disableFlip != null ? props.disableFlip : true}
+        flipHorizontal={
+          props.disableFlip != null && props.disableFlip === false
+            ? props.disableFlip
+            : true
+        }
         flipVertical={false}
         flip={props.flipped}
       >
